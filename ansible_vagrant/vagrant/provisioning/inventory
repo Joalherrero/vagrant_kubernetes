@@ -1,0 +1,6 @@
+ansible-slave ansible_connection=local
+k8s-master ansible_connection=local
+[nodes]
+k8s-node-1 ansible_connection=local 
+k8s-node-2 ansible_connection=local 
+k8s-node-3 ansible_connection=local 
