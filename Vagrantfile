@@ -24,6 +24,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "k8s-master" do |master|
         master.vm.box = 'bento/ubuntu-16.04'
         master.vm.network "private_network", ip: "203.0.113.110"
+        master.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct:false
         master.vm.hostname = "k8s-master"
         master.vm.synced_folder "ansible_vagrant", "/ansible_vagrant/vagrant/provisioning", :mount_options => ["ro"]
         master.vm.provision "ansible_local" do |ansible|
