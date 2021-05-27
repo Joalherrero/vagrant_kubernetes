@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "ansible" do |ansible|
         ansible.vm.box = "bento/ubuntu-16.04"
+        ansible.vm.box_version = "202102.02.0"
         ansible.vm.network "private_network", ip: "203.0.113.8"
         ansible.vm.hostname = "ansible-slave"
         ansible.vm.synced_folder "ansible_vagrant", "/ansible_vagrant", :mount_options => ["ro"]
@@ -23,6 +24,7 @@ Vagrant.configure("2") do |config|
       
     config.vm.define "k8s-master" do |master|
         master.vm.box = 'bento/ubuntu-16.04'
+        master.vm.box_version = "202102.02.0"
         master.vm.network "private_network", ip: "203.0.113.110"
         master.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct:false
         master.vm.hostname = "k8s-master"
@@ -40,6 +42,7 @@ Vagrant.configure("2") do |config|
     (1..3).each do |i|
         config.vm.define "k8s-node-#{i}" do |node|
             node.vm.box = 'bento/ubuntu-16.04'
+            node.vm.box_version = "202102.02.0"
             node.vm.network "private_network", ip: "203.0.113.#{i + 10}"
             node.vm.hostname = "node-#{i}"
             node.vm.synced_folder "ansible_vagrant", "/ansible_vagrant/vagrant/provisioning", :mount_options => ["ro"]
